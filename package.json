@@ -1,7 +1,7 @@
 {
   "name": "websocket-chat",
   "version": "1.0.0",
-  "description": "",
+  "description": "Créer un chat avec les sockets de node js",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,5 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "socket.io": "^2.3.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EthanZerah/Chat-sockets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EthanZerah/Chat-sockets/issues"
+  },
+  "homepage": "https://github.com/EthanZerah/Chat-sockets#readme"
 }

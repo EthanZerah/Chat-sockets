@@ -4,9 +4,9 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      div { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
@@ -14,15 +14,26 @@
     <script src ="/socket.io/socket.io.js"></script>
   </head>
   <body>
+    <span id=bonjour></span>
     <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    <div>
+      <input id="m" autocomplete="off" /><button onclick='envoyer()'>Send</button>
+    </div>
   </body>
   <script>
+      const affiche = document.getElementById('bonjour')
       const socket=io();
-      socket.emit("firstConnection", 'Hello Socket Server');
 
-      socket.on("message",data => console.log(data))
+      socket.emit("firstConnection", 'Hello Socket Server');
+      
+      socket.on("message",data => affiche.innerHTML = data );
+      
+      function envoyer(){
+        let hello = document.getElementById('m').value;
+        socket.emit('message',hello);
+        document.getElementById('m').value = '';
+      };
+
+      
   </script>
 </html>

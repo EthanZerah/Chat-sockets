@@ -1,16 +1,23 @@
 const http = require('http');
 const fs = require('fs');
 
-fs.readFile('./inex.html','utf8', (err,data) => {
+
+fs.readFile('./index.html','utf8', (err,data) => {
     if (err) {
         console.error(err)
     }
     if(data){
         const server = http.createServer((req,res)=>{
-            console.log(req.url);
             res.end(data);
         });
         const io = require('socket.io')(server);
+
+        io.on('connection', function(socket){
+            console.log('a user connected');
+            socket.on('disconnect', function(){
+              console.log('user disconnected');
+            });
+          });
         
         let messages = [];
         io.on('connection',client => {
@@ -19,6 +26,7 @@ fs.readFile('./inex.html','utf8', (err,data) => {
             client.on('message',data => {
                 messages.push(data);
                 io.emit('message',messages);
+                console.log(messages);
             });
         });
 
