@@ -30,7 +30,7 @@
       
       function envoyer(){
         let hello = document.getElementById('m').value;
-        socket.emit('message',hello);
+        socket.emit('message',hello + '<br>');
         document.getElementById('m').value = '';
       };
 
